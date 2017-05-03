@@ -2,14 +2,16 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/app';
-import PageIndex from './components/page_index';
-import Signup from './components/sign_up';
-import Login from './components/login';
+import Home from './components/home';
+import PostDetail from './components/post_detail';
+import Signin from './components/signin';
+import Me from './components/me';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={PageIndex} />
-    <Route path="/domain/signup" component={Signup} />
-    <Route path="/domain/login" component={Login} />
+    <IndexRoute component={Home} />
+    <Route path="/post/:postid" component={PostDetail}/>
+    <Route path="/signin" component={Signin}/>
+    <Route path="/me" component={Me}/>
   </Route>
 )
