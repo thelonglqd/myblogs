@@ -7,14 +7,23 @@ import { makeComment } from '../actions';
 class PostDetail extends Component {
   constructor(props) {
     super(props);
-    this.commentHandler = this.commentHandler.bind(this);
+    this.state = { comment: '' };
   }
   componentWillMount() {
     // Will load the post with id here
+    // destructuring
+    const a = {value: '123', type: '456'};
+    const { value, type } = a;
   }
 
-  commentHandler(comment) {
-    this.props.makeComment(comment);
+  handlerTypingAction = (event) => {
+    this.setState({ comment: event.target.value });
+  }
+
+  handleCommentAction = (event) => {
+    event.preventDefault();
+    this.props.makeComment(this.state.comment);
+    this.setState({ comment: '' });
   }
 
   render() {
@@ -22,7 +31,14 @@ class PostDetail extends Component {
       <div>
         This is detail for post id = {this.props.params.postid}
         {/*This will be <PostContent/> Component*/}
-        <Comments commentHandler={this.commentHandler} comments={this.props.postDetail.comments}/>
+        <Comments
+          value={this.state.comment}
+          commentText={this.state.comment}
+          handlerTypingAction={this.handlerTypingAction}
+          handleCommentAction={this.handleCommentAction}
+          commentHandler={this.commentHandler}
+          comments={this.props.postDetail.comments}/>
+          {this.state.comment}
       </div>
     )
   }
