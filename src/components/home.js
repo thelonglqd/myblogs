@@ -1,22 +1,35 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-export default class Home extends Component {
+class Home extends Component {
+  renderPostPlotList() {
+    return this.props.posts.posts.map((post) => {
+      return (
+        <li key={post.id}>
+          <h3>{post.title}</h3>
+          <p>{post.plot}</p>
+          <Link to={`/posts/${post.id}`}>Continue reading ...</Link>
+        </li>
+      )
+    })
+  }
+
   render() {
     return (
       <div>
         <ul>
-          <li>
-            post 1 content
-            <Link to="/post/1">Continue reading ...</Link>
-          </li>
-          <li>
-            post 2 content
-            <Link to="/post/2">Continue reading ...</Link>
-          </li>
+          {this.renderPostPlotList()}
         </ul>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  }
+}
+
+export default connect(mapStateToProps)(Home);

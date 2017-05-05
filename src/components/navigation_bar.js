@@ -12,8 +12,8 @@ export default class NavigationBar extends Component {
               <Link className="navbar-brand" to="/">
                 <icon className="glyphicon glyphicon-home"/>
               </Link>
-              <Link to="/signin" className="navbar-link" href="#">Sign in/Sign up</Link>
-              <Link to="/me" className="navbar-link" href="#">Me</Link>
+              <Link to="/signin" className="navbar-link">Sign in/Sign up</Link>
+              <Link to="/me" className="navbar-link">Me</Link>
             </div>
           </div>
         </nav>

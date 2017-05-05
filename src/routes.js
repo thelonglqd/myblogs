@@ -10,7 +10,7 @@ import Me from './components/me';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
-    <Route path="/post/:postid" component={PostDetail}/>
+    <Route path="/posts/:postid" component={PostDetail}/>
     <Route path="/signin" component={Signin}/>
     <Route path="/me" component={Me}/>
   </Route>

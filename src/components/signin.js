@@ -18,16 +18,13 @@ export default class Signin extends Component {
         </a>
         <form>
           <form-group>
-            <label className="form-control">Email</label>
-            <input type="text" className="form-control"/>
+            <input type="text" className="form-control" placeholder="example@gmail.com"/>
           </form-group>
           <form-group>
-            <label className="form-control">Password</label>
-            <input type="text" className="form-control"/>
+            <input type="text" className="form-control" placeholder="password"/>
           </form-group>
           <form-group>
-            <label className="form-control">Confirmation</label>
-            <input type="text" className="form-control"/>
+            <input type="text" className="form-control" placeholder="re-type password"/>
           </form-group>
           <button className="btn btn-default btn-primary">Signin</button>
           <button className="btn btn-default btn-primary">Signup</button>
