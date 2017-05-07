@@ -11,9 +11,6 @@ class PostDetail extends Component {
   }
   componentWillMount() {
     // Will load the post with id here
-    // destructuring
-    const a = {value: '123', type: '456'};
-    const { value, type } = a;
   }
 
   handlerTypingAction = (event) => {
