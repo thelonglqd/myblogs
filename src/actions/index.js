@@ -1,4 +1,4 @@
-import {COMMENT, SIGNIN} from './types';
+import {COMMENT, SIGNIN, SIGNIN_SUCCESS} from './types';
 
 const admin = {
   email: 'admin@gmail.com',
@@ -10,25 +10,20 @@ const user = {
   password: 'user123'
 }
 
+const emails = ['admin@gmail.com', 'user@gmail.com'];
+const passwords = ['123456']
+
 export function makeComment(comment) {
   return {type: COMMENT, payload: {
       comment
     }}
 }
 
-export function signin(props, dispatch) {
+export function onSigninSuccessHandler() {
   return {
-    type: SIGNIN,
-    payload: new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (props.email !== admin.email && props.email !== user.email) {
-          reject({email: 'email does not existed'});
-        }
-        if (props.password !== admin.password && props.password !== user.password) {
-          reject({password: 'password is incorrect'});
-        }
-        resolve();
-      }, 500); // simulate server lantency
-    })
+    type: SIGNIN_SUCCESS,
+    payload: {
+      authenticated: true
+    }
   };
 }

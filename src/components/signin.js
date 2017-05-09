@@ -1,18 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { signin } from '../actions';
-import { browserHistory } from 'react-router';
+import { signin, onSigninSuccessHandler } from '../actions';
+import { browserHistory, router } from 'react-router';
 
 class Signin extends Component {
   static contextTypes = {
     router: PropTypes.object
   }
 
-  onSignin = (props) => {
-    this.props.signin(props)
-      .then(() => {
-        this.context.router.push('/');
-      })
+  onSignin = (values, dispatch) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (!['admin@gmail.com', 'user@gmail.com'].includes(values.email)) {
+          reject({email: 'User does not exist', _error: 'Login failed!'})
+        } else if (values.password !== '123456') {
+          reject({password: 'Wrong password', _error: 'Login failed!'})
+        } else {
+          this.context.router.push('/');
+          this.props.onSigninSuccessHandler()
+          resolve();      
+        }
+      }, 500) // simulate server latency
+    });
   }
 
   render() {
@@ -32,17 +41,17 @@ class Signin extends Component {
           <span className="fa fa-google"></span>
           Sign in with Google
         </a>
-        <form onSubmit={handleSubmit(this.onSignin)}>
-          <div className={`form-group ${email.touched && email.invalid ? 'has-danger' : ''}`}>
+        <form onSubmit={this.props.handleSubmit(this.onSignin)}>
+          <div className={`form-group ${email.touched && email.dirty && email.invalid ? 'has-danger' : ''}`}>
             <input type="text" className="form-control" placeholder="example@gmail.com" {...email}  />
             <div className="text-help">
-              {email.touched ? email.error : ''}
+              {email.touched && email.dirty ? email.error : ''}
             </div>
           </div>
-          <div className={`form-group ${password.touched && password.invalid ? 'has-danger' : ''}`}>
+          <div className={`form-group ${password.touched && password.dirty && password.invalid ? 'has-danger' : ''}`}>
             <input type="password" className="form-control" placeholder="password" {...password} />
             <div className="text-help">
-              {password.touched ? password.error : ''}
+              {password.touched && password.dirty ? password.error : ''}
             </div>
           </div>
           <div className="form-group">
@@ -74,12 +83,5 @@ function mapStateToProps(state) {
 export default reduxForm({
   form: 'SigninForm',
   fields: ['email', 'password', 'comfirmation'],
-  validate,
-  onSubmitSuccess: () => {
-    console.log('come to submit success function');
-    browserHistory.push('/')
-  },
-  onSubmitFail: () => {
-    console.log('submit failed !!!');
-  }
-}, mapStateToProps, { signin })(Signin);
+  validate
+}, mapStateToProps, { signin, onSigninSuccessHandler })(Signin);

@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import NavigationBar from './navigation_bar';
-// import Authentication from './Authentication';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    // const ComposedComponent = Authentication(NavigationBar);
     return (
       <div>
         <NavigationBar />
@@ -14,3 +17,9 @@ export default class App extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { authentication: state.authentication }
+}
+
+export default connect(mapStateToProps)(App);

@@ -3,19 +3,8 @@ import {Link} from 'react-router';
 import { connect } from 'react-redux';
 
 class NavigationBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { authenticated: false };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('this.props: ', this.props);
-    if (!this.props.signinFormFailed) {
-      this.setState({ authenticated: true });
-    }
-  }
-
   render() {
+    const { authenticated } = this.props.authentication;
     return (
       <div>
         {/*Navbar*/}
@@ -25,9 +14,16 @@ class NavigationBar extends Component {
               <Link className="navbar-brand" to="/">
                 <icon className="fa fa-home"/>
               </Link>
-              <Link to="/signin" className="navbar-link">
-                {this.state.authenticated ? `Logout` : `Sign in/Sign up`}
-              </Link>
+              {authenticated ? 
+              (
+                <Link onClick={this.logoutHandler} to="/" className="navbar-link">
+                  Logout
+                </Link>
+              ) : (
+                <Link to="/signin" className="navbar-link">
+                  Sign in/Sign up
+                </Link>
+              )}
               <Link to="/me" className="navbar-link">Me</Link>
             </div>
           </div>
@@ -38,10 +34,7 @@ class NavigationBar extends Component {
 }
 
 function mapStateToProps(state) {
-  return { 
-    signinFormFailed: state.form.SigninForm
-    ? state.form.SigninForm._submitFailed 
-    : true }
+  return { authentication: state.authentication }
 }
 
 export default connect(mapStateToProps)(NavigationBar);
