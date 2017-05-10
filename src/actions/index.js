@@ -1,4 +1,9 @@
-import {COMMENT, SIGNIN, SIGNIN_SUCCESS} from './types';
+import {
+  COMMENT,
+  SIGNIN,
+  SIGNIN_SUCCESS,
+  FETCH_MY_INFO
+} from './types';
 
 const admin = {
   email: 'admin@gmail.com',
@@ -26,4 +31,11 @@ export function onSigninSuccessHandler() {
       authenticated: true
     }
   };
+}
+
+export function fetchMyInfo() {
+  return {
+    type: FETCH_MY_INFO,
+    payload: { }
+  }
 }

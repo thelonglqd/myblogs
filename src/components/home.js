@@ -12,7 +12,7 @@ class Home extends Component {
           <h3>{post.title}</h3>
           <p>{post.plot}</p>
           <Link to={`/posts/${post.id}`}>Continue reading ...</Link>
-          {authenticated ? (<Link tp="#">Edit this post ...</Link>) : ''}
+          {authenticated ? (<Link to="#">Edit this post ...</Link>) : ''}
         </li>
       )
     })

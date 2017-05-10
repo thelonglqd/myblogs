@@ -5,7 +5,7 @@ import App from './components/app';
 import Home from './components/home';
 import PostDetail from './components/post_detail';
 import Signin from './components/signin';
-import Me from './components/me';
+import Me from './components/me/me';
 
 export default (
   <Route path="/" component={App}>
